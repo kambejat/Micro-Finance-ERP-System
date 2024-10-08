@@ -8,7 +8,6 @@ api = Api(role_permissions_bp)
 
 role_permission_parser = reqparse.RequestParser()
 
-role_permission_parser.add_argument('role_permission_id', type=int, default=True, help="Required role permission identifier")
 role_permission_parser.add_argument('role_id', type=int, default=None, help="Role identifier")
 role_permission_parser.add_argument('permission_id', type=int, default=None, help="Permission identifier for the role permission")
 

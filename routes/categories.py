@@ -8,7 +8,6 @@ api = Api(categories_bp)
 
 category_parser = reqparse.RequestParser()
 
-category_parser.add_argument('category_id', type=int, default=True, help="Required category identifier")
 category_parser.add_argument('name', type=str, required=True, help="Category name is required")
 category_parser.add_argument('description', type=str, required=True, help="Description of the category")
 

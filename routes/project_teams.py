@@ -8,7 +8,6 @@ api = Api(project_teams_bp)
 
 project_team_parser = reqparse.RequestParser()
 
-project_team_parser.add_argument('project_team_id', type=int, default=True, help="Required project team identifier")
 project_team_parser.add_argument('project_id', type=int, default=None, help="Required project identifier (optional)")
 project_team_parser.add_argument('team_id', type=int, default=None, help="Required team identifier (optional) or team name (optional)")
 

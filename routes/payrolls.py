@@ -9,7 +9,6 @@ api = Api(payroll_bp)
 
 payroll_parser = reqparse.RequestParser()
 
-payroll_parser.add_argument('payroll_id', type=int, default=True, help="Required payroll identifier")
 payroll_parser.add_argument('employee_id', type=int, default=None, help="Required employee identifier for employee")
 payroll_parser.add_argument('date', type=datetime.datetime, default=None, help="Required date for employee")
 payroll_parser.add_argument('gross_salary', type=float, default=None, help="Required amount of gross salary for employee")

@@ -7,7 +7,6 @@ api = Api(deductions_bp)
 
 deduction_parser = reqparse.RequestParser()
 
-deduction_parser.add_argument('deduction_id', type=int, default=True, help="Required deduction identifier")
 deduction_parser.add_argument('name', type=str, default=None, help='Deduction name (optional)')
 deduction_parser.add_argument('description', type=str, default=None, help='Deduction description (optional)')
 deduction_parser.add_argument('amount', type=float, default=None, help='Deduction amount (optional)')

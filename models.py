@@ -6,7 +6,7 @@ db = SQLAlchemy()
 
 # Core Modules
 class User(db.Model):
-    user_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     fullname = db.Column(db.String(120), nullable=True)
@@ -22,29 +22,29 @@ class User(db.Model):
         return check_password_hash(self.password_hash, password)
 
 class Role(db.Model):
-    role_id = db.Column(db.Integer, primary_key=True)
+    role_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
     description = db.Column(db.String(255))
 
 class Permission(db.Model):
-    permission_id = db.Column(db.Integer, primary_key=True)
+    permission_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
     description = db.Column(db.String(255))
 
 class UserRole(db.Model):
-    user_role_id = db.Column(db.Integer, primary_key=True)
+    user_role_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     role_id = db.Column(db.Integer, db.ForeignKey('role.role_id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
 
 class RolePermission(db.Model):
-    role_permission_id = db.Column(db.Integer, primary_key=True)
+    role_permission_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     role_id = db.Column(db.Integer, db.ForeignKey('role.role_id'), nullable=False)
     permission_id = db.Column(db.Integer, db.ForeignKey('permission.permission_id'), nullable=False)
 
 
 # Financial Institution Modules
 class Customer(db.Model):
-    customer_id = db.Column(db.Integer, primary_key=True)
+    customer_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
     address = db.Column(db.String(255))
     contact_info = db.Column(db.String(255))
@@ -53,7 +53,7 @@ class Customer(db.Model):
 
 
 class Account(db.Model):
-    account_id = db.Column(db.Integer, primary_key=True)
+    account_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.customer_id'), nullable=False)
     account_number = db.Column(db.String(20), unique=True, nullable=False)
     account_type = db.Column(db.String(50), nullable=False)
@@ -63,7 +63,7 @@ class Account(db.Model):
 
 
 class Transaction(db.Model):
-    transaction_id = db.Column(db.Integer, primary_key=True)
+    transaction_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     account_id = db.Column(db.Integer, db.ForeignKey('account.account_id'), nullable=False)
     date = db.Column(db.DateTime, default=db.func.current_timestamp())
     amount = db.Column(db.Float, nullable=False)
@@ -72,7 +72,7 @@ class Transaction(db.Model):
 
 
 class Loan(db.Model):
-    loan_id = db.Column(db.Integer, primary_key=True)
+    loan_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.customer_id'), nullable=False)
     account_id = db.Column(db.Integer, db.ForeignKey('account.account_id'), nullable=False)
     loan_type = db.Column(db.String(50), nullable=False)
@@ -85,7 +85,7 @@ class Loan(db.Model):
 
 
 class Payment(db.Model):
-    payment_id = db.Column(db.Integer, primary_key=True)
+    payment_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     loan_id = db.Column(db.Integer, db.ForeignKey('loan.loan_id'), nullable=False)
     date = db.Column(db.DateTime, default=db.func.current_timestamp())
     amount = db.Column(db.Float, nullable=False)
@@ -93,14 +93,14 @@ class Payment(db.Model):
 
 
 class Branch(db.Model):
-    branch_id = db.Column(db.Integer, primary_key=True)
+    branch_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
     location = db.Column(db.String(255), nullable=False)
     manager_id = db.Column(db.Integer, db.ForeignKey('employee.employee_id'))
 
 
 class Employee(db.Model):
-    employee_id = db.Column(db.Integer, primary_key=True)
+    employee_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
     contact_info = db.Column(db.String(255))
     job_id = db.Column(db.Integer, db.ForeignKey('job.job_id'))
@@ -111,14 +111,14 @@ class Employee(db.Model):
 
 
 class Job(db.Model):
-    job_id = db.Column(db.Integer, primary_key=True)
+    job_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255))
     salary_range = db.Column(db.String(255))
 
 
 class AuditLog(db.Model):
-    auditlog_id = db.Column(db.Integer, primary_key=True)
+    auditlog_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
     action = db.Column(db.String(255), nullable=False)
     date = db.Column(db.DateTime, default=db.func.current_timestamp())
@@ -126,7 +126,7 @@ class AuditLog(db.Model):
 
 
 class InventoryItem(db.Model):
-    item_id = db.Column(db.Integer, primary_key=True)
+    item_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255))
     quantity = db.Column(db.Integer, nullable=False)
@@ -137,7 +137,7 @@ class InventoryItem(db.Model):
 
 
 class InventoryTransaction(db.Model):
-    transaction_id = db.Column(db.Integer, primary_key=True)
+    transaction_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     item_id = db.Column(db.Integer, db.ForeignKey('inventory_item.item_id'), nullable=False)
     date = db.Column(db.DateTime, default=db.func.current_timestamp())
     quantity = db.Column(db.Integer, nullable=False)
@@ -147,13 +147,13 @@ class InventoryTransaction(db.Model):
 
 
 class Category(db.Model):
-    category_id = db.Column(db.Integer, primary_key=True)
+    category_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255))
 
 
 class Payroll(db.Model):
-    payroll_id = db.Column(db.Integer, primary_key=True)
+    payroll_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     employee_id = db.Column(db.Integer, db.ForeignKey('employee.employee_id'), nullable=False)
     date = db.Column(db.DateTime, default=db.func.current_timestamp())
     gross_salary = db.Column(db.Float, nullable=False)
@@ -163,7 +163,7 @@ class Payroll(db.Model):
 
 
 class Deduction(db.Model):
-    deduction_id = db.Column(db.Integer, primary_key=True)
+    deduction_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255))
     amount = db.Column(db.Float, nullable=False)
@@ -172,7 +172,7 @@ class Deduction(db.Model):
 
 
 class Bonus(db.Model):
-    bonus_id = db.Column(db.Integer, primary_key=True)
+    bonus_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255))
     amount = db.Column(db.Float, nullable=False)
@@ -182,7 +182,7 @@ class Bonus(db.Model):
 
 # Project Management Modules
 class Project(db.Model):
-    project_id = db.Column(db.Integer, primary_key=True)
+    project_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255))
     start_date = db.Column(db.DateTime, default=db.func.current_timestamp())
@@ -192,7 +192,7 @@ class Project(db.Model):
 
 
 class Task(db.Model):
-    task_id = db.Column(db.Integer, primary_key=True)
+    task_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     project_id = db.Column(db.Integer, db.ForeignKey('project.project_id'), nullable=False)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255))
@@ -204,19 +204,19 @@ class Task(db.Model):
 
 
 class Team(db.Model):
-    team_id = db.Column(db.Integer, primary_key=True)
+    team_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255))
 
 
 class TeamMember(db.Model):
-    team_member_id = db.Column(db.Integer, primary_key=True)
+    team_member_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     team_id = db.Column(db.Integer, db.ForeignKey('team.team_id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
     role = db.Column(db.String(255))
 
 
 class ProjectTeam(db.Model):
-    project_team_id = db.Column(db.Integer, primary_key=True)
+    project_team_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     project_id = db.Column(db.Integer, db.ForeignKey('project.project_id'), nullable=False)
     team_id = db.Column(db.Integer, db.ForeignKey('team.team_id'), nullable=False)

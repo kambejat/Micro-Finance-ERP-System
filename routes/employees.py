@@ -9,7 +9,6 @@ api = Api(employees_bp)
 
 employee_parser = reqparse.RequestParser()
 
-employee_parser.add_argument('employee_id', type=int, default=True, help="Required employee identifier")
 employee_parser.add_argument('name', type=str, default=None, help="Name of employee to create or update in database")
 employee_parser.add_argument('contact_info', type=str, default=None, help="Contact information for employee to create or update in database")
 employee_parser.add_argument('job_id', type=int, default=None, help="Job ID to create or update")

@@ -8,7 +8,6 @@ api = Api(user_roles_bp)
 
 user_roles_parser = reqparse.RequestParser()
 
-user_roles_parser.add_argument('user_role_id', type=int, default=True, help="Required user role identifier")
 user_roles_parser.add_argument("role_id", type=int, default=None, help="Required role identifier")
 user_roles_parser.add_argument("user_id", type=int, default=None, help="Required user identifier")
 

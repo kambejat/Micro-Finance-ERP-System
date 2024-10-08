@@ -8,7 +8,6 @@ api = Api(permissions_bp)
 
 permission_parser = reqparse.RequestParser()
 
-permission_parser.add_argument('permission_id', type=int, default=True, help="Required permission identifier")
 permission_parser.add_argument('name', type=str, default=None, help="Name of the permission  to be granted to the user")
 permission_parser.add_argument('description', type=str, default=None, help="Description of the permission to be granted to the user")
 

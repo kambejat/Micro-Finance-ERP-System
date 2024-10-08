@@ -11,7 +11,6 @@ api = Api(loans_bp)
 
 loan_parser = reqparse.RequestParser()
 
-loan_parser.add_argument('loan_id', type=int, default=True, help="Required loan identifier")
 loan_parser.add_argument('customer_id', type=int, required=True, help="Customer ID is required")
 loan_parser.add_argument('account_id', type=int, required=True, help="Account ID is required")
 loan_parser.add_argument('loan_type', type=str, required=True, help="Account type is required")

@@ -7,7 +7,6 @@ api = Api(team_members_bp)
 
 team_member_parser = reqparse.RequestParser()
 
-team_member_parser.add_argument('team_member_id', type=int, default=True, help="Required team member identifier")
 team_member_parser.add_argument("team_id", type=int, default=None, help="Team identifier for the team")
 team_member_parser.add_argument("user_id", type=int, default=None, help="User identifier for the team")
 team_member_parser.add_argument("role", type=str, default=None, help="Role for the team member")

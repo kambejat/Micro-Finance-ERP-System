@@ -8,7 +8,6 @@ transactions_bp = Blueprint('transactions', __name__)
 api = Api(transactions_bp)
 
 transactions_parser = reqparse.RequestParser()
-transactions_parser.add_argument('transaction_id', type=int, default=True, help="Required transaction identifier")
 transactions_parser.add_argument("account_id", type=int, default=None, help="Account identifier is required")
 transactions_parser.add_argument("date", type=datetime, default=None, help="Date to update transaction")
 transactions_parser.add_argument("amount", type=float, default=None, help="Amount is required")

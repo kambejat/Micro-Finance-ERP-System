@@ -9,7 +9,6 @@ api = Api(branches_bp)
 
 branch_parser = reqparse.RequestParser()
 
-branch_parser.add_argument('branch_id', type=int, default=True, help="Required branch identifier")
 branch_parser.add_argument('name', type=str, required=True, help="Branch name is required")
 branch_parser.add_argument('location', type=str, required=True, help="Branch location is required")
 branch_parser.add_argument('manager_id', type=int, required=True, help="Manager identifier is required")

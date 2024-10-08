@@ -8,7 +8,6 @@ accounts_bp = Blueprint('accounts', __name__)
 api = Api(accounts_bp)
 
 account_parser = reqparse.RequestParser()
-account_parser.add_argument('account_id', type=int, default=True, help="Required account identifier")
 account_parser.add_argument('customer_id', type=int, default=None, help='Customer identifier for the account')
 account_parser.add_argument('account_number', type=str, required=True, help='Account number is required')
 account_parser.add_argument('account_type', type=str, required=True, help='Account type is required')

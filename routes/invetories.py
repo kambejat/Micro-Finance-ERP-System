@@ -9,7 +9,6 @@ api = Api(inventory_bp)
 
 inventory_parser = reqparse.RequestParser()
 
-inventory_parser.add_argument('item_id', type=int, default=True, help="Required item identifier")
 inventory_parser.add_argument('name', type=str, default=None, help="Name of the inventory item")
 inventory_parser.add_argument('description', type=str, default=None, help="Description of the inventory item")
 inventory_parser.add_argument('quantity', type=int, default=None, help="Quantity of the inventory item")

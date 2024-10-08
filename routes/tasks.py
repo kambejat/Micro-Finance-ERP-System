@@ -8,7 +8,6 @@ api = Api(tasks_bp)
 
 task_parser = reqparse.RequestParser()
 
-task_parser.add_argument('task_id', type=int, default=True, help="Required task identifier")
 task_parser.add_argument('project_id', type=int, default=True, help="Required project identifier")
 task_parser.add_argument('name', type=str, default=None, help="Required task name")
 task_parser.add_argument('description', type=str, default=None, help="Required task description")

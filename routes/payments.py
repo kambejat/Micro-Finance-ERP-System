@@ -9,7 +9,6 @@ api = Api(payments_bp)
 
 payment_parser = reqparse.RequestParser()
 
-payment_parser.add_argument('payment_id', type=int, default=True, help="Required payment identifier")
 payment_parser.add_argument('loan_id', type=int, default=None, help="Required loan identifier")
 payment_parser.add_argument('date', type=datetime.datetime, default=None, help="Date of interest to be paid")
 payment_parser.add_argument('amount', type=float, default=None, help="Amount to be paid to the customer")

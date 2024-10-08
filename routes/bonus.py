@@ -8,7 +8,6 @@ api = Api(bonuses_bp)
 
 bonus_parser = reqparse.RequestParser()
 
-bonus_parser.add_argument('bonus_id', type=int, default=True, help="Required bonus identifier")
 bonus_parser.add_argument('name', type=str, default=None, help='bonus name (optional)')
 bonus_parser.add_argument('description', type=str, default=None, help='bonus description (optional)')
 bonus_parser.add_argument('amount', type=float, default=None, help='bonus amount (optional)')

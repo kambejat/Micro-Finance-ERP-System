@@ -8,7 +8,6 @@ api = Api(inventory_transactions_bp)
 
 inventory_transaction_parser = reqparse.RequestParser()
 
-inventory_transaction_parser.add_argument('transaction_id', type=int, default=True, help="Required inventory transaction identifier")
 inventory_transaction_parser.add_argument('item_id', type=str, default=None, help="Required inventory item identifier") 
 inventory_transaction_parser.add_argument('date', type=datetime, default=None, help="Date of inventory transaction")
 inventory_transaction_parser.add_argument('quantity', type=int, default=None, help="Quantity of inventory transaction")

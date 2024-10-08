@@ -7,7 +7,6 @@ projects_bp = Blueprint('projects', __name__)
 api = Api(projects_bp)
 
 project_parser = reqparse.RequestParser()
-project_parser.add_argument('project_id', type=int, default=True, help="Required project identifier")
 project_parser.add_argument('name', type=str, default=None, help="Required project name")
 project_parser.add_argument('description', type=str, default=None, help="Required project description  (optional)")
 project_parser.add_argument('start_date', type=datetime, default=None, help="Required project start date (optional)")

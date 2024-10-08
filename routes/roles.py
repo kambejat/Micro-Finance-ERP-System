@@ -1,16 +1,14 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint
 from flask_restful import Resource, Api, reqparse, fields, marshal_with, marshal
 from models import db, Role
 
 roles_bp = Blueprint('roles', __name__)
-
 api = Api(roles_bp)
 
+# Role parser for post and put methods
 role_parser = reqparse.RequestParser()
-
-role_parser.add_argument('role_id', type=int, default=True, help="Required role identifier")
-role_parser.add_argument('name', type=str, default=None, help="Role name to be used for role creation")
-role_parser.add_argument('description', type=str, default=None, help="Role description to be used for role creation")
+role_parser.add_argument('name', type=str, required=True, help="Role name is required.")
+role_parser.add_argument('description', type=str, required=True, help="Role description is required.")
 
 role_fields = {
     'role_id': fields.Integer,
@@ -30,7 +28,7 @@ class RoleResource(Resource):
     
     @marshal_with(role_fields)
     def post(self):
-        data = role_parser.parse_args()
+        data = role_parser.parse_args()  # Parse the incoming request data
         new_role = Role(name=data['name'], description=data['description'])
         db.session.add(new_role)
         db.session.commit()
@@ -62,5 +60,7 @@ class RoleResource(Resource):
         db.session.commit()
         return role, 200
 
-api.add_resource(RoleResource, '/roles/<int:role_id>')
+
+# Add resources and URL rules
+api.add_resource(RoleResource, '/roles', '/roles/<int:role_id>')
 roles_bp.add_url_rule('/roles', view_func=RoleResource.as_view('roles'))

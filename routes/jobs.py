@@ -8,7 +8,6 @@ api = Api(jobs_bp)
 
 job_parser = reqparse.RequestParser()
 
-job_parser.add_argument('job_id', type=int, default=True, help="Required job identifier")
 job_parser.add_argument('name', type=str, required=True, help="Job name is required")
 job_parser.add_argument('title', type=str, required=True, help="Job title is required (default) or default")
 job_parser.add_argument('description', type=str, required=True, help="Job description is required")

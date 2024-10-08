@@ -9,7 +9,6 @@ api = Api(customers_bp)
 
 customer_parser = reqparse.RequestParser()
 
-customer_parser.add_argument('customer_id', type=int, default=True, help="Required customer identifier")
 customer_parser.add_argument('name', type=str, default=None, help="Name of the customer to create")
 customer_parser.add_argument('address', type=str, default=None, help="Address of the customer to create")
 customer_parser.add_argument('email', type=str, default=None, help="Email address of the customer to create")

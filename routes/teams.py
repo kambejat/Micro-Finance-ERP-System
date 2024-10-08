@@ -7,7 +7,6 @@ api = Api(teams_bp)
 
 team_parser = reqparse.RequestParser()
 
-team_parser.add_argument('team_id', type=int, default=True, help="Required team identifier")
 team_parser.add_argument('name', type=str, default=None, help="Team name to be used for team creation")
 team_parser.add_argument('description', type=str, default=None, help="Team description to be used for team creation")
 

@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
+from flask_cors import CORS  # Import CORS
 
 from models import db
 from config import Config
@@ -30,6 +31,7 @@ from routes.teams import teams_bp
 from routes.transcations import transactions_bp
 from routes.user_roles import user_roles_bp
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -37,6 +39,9 @@ def create_app():
     db.init_app(app)
     migrate = Migrate(app, db)
     JWTManager(app)
+
+    # Enable CORS for all routes
+    CORS(app)  # You can restrict this with specific origins if needed
 
     with app.app_context():
         db.create_all()
