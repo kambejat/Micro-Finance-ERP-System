@@ -21,15 +21,13 @@ from routes.loans import loans_bp
 from routes.payments import payments_bp
 from routes.payrolls import payroll_bp
 from routes.permissions import permissions_bp
+from routes.user_permissions import user_permissions_bp
 from routes.project_teams import project_teams_bp
 from routes.projects import projects_bp
-from routes.role_permissions import role_permissions_bp
-from routes.roles import roles_bp
 from routes.tasks import tasks_bp
 from routes.team_members import team_members_bp
 from routes.teams import teams_bp
 from routes.transcations import transactions_bp
-from routes.user_roles import user_roles_bp
 
 
 def create_app():
@@ -63,15 +61,13 @@ def create_app():
     app.register_blueprint(payments_bp, url_prefix='/api')
     app.register_blueprint(payroll_bp, url_prefix='/api')
     app.register_blueprint(permissions_bp, url_prefix='/api')
+    app.register_blueprint(user_permissions_bp, url_prefix='/api')
     app.register_blueprint(project_teams_bp, url_prefix='/api')
     app.register_blueprint(projects_bp, url_prefix='/api')
-    app.register_blueprint(role_permissions_bp, url_prefix='/api')
-    app.register_blueprint(roles_bp, url_prefix='/api')
     app.register_blueprint(tasks_bp, url_prefix='/api')
     app.register_blueprint(team_members_bp, url_prefix='/api')
     app.register_blueprint(teams_bp, url_prefix='/api')
     app.register_blueprint(transactions_bp, url_prefix='/api')
-    app.register_blueprint(user_roles_bp, url_prefix='/api')
 
     @app.route('/')
     def list_routes():

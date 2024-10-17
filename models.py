@@ -1,8 +1,14 @@
 from flask_sqlalchemy import SQLAlchemy
+from enum import Enum
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
+
+class RoleEnum(Enum):
+    ADMIN = "Admin"
+    USER = "User"
+    GUEST = "Guest"
 
 # Core Modules
 class User(db.Model):
@@ -10,10 +16,14 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     fullname = db.Column(db.String(120), nullable=True)
+    phone_number = db.Column(db.String(80), nullable=True)
+    isActive = db.Column(db.Boolean, default=False, nullable=True)
+    isStaff = db.Column(db.Boolean, default=False, nullable=True)
     password_hash = db.Column(db.String(255), nullable=False)
     profile_image = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
-    role_id = db.Column(db.Integer, db.ForeignKey('role.role_id'), nullable=False)
+    
+    role = db.Column(db.Enum(RoleEnum), nullable=False, default=RoleEnum.USER)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -21,24 +31,21 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-class Role(db.Model):
-    role_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(80), unique=True, nullable=False)
-    description = db.Column(db.String(255))
 
 class Permission(db.Model):
     permission_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
-    description = db.Column(db.String(255))
-
-class UserRole(db.Model):
-    user_role_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    role_id = db.Column(db.Integer, db.ForeignKey('role.role_id'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    description = db.Column(db.String(255), nullable=True)
 
 class RolePermission(db.Model):
     role_permission_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    role_id = db.Column(db.Integer, db.ForeignKey('role.role_id'), nullable=False)
+    role = db.Column(db.Enum(RoleEnum), nullable=False)
+    permission_id = db.Column(db.Integer, db.ForeignKey('permission.permission_id'), nullable=False)
+
+
+class UserPermission(db.Model):
+    user_permission_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
     permission_id = db.Column(db.Integer, db.ForeignKey('permission.permission_id'), nullable=False)
 
 
@@ -96,7 +103,7 @@ class Branch(db.Model):
     branch_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
     location = db.Column(db.String(255), nullable=False)
-    manager_id = db.Column(db.Integer, db.ForeignKey('employee.employee_id'))
+    manager_id = db.Column(db.Integer, db.ForeignKey('employee.employee_id'), nullable=True) 
 
 
 class Employee(db.Model):
